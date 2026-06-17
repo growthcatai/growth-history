@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "slug": "dummy-customer",
+    "name": "Dummy Customer",
+    "logoUrl": null,
+    "instagramHandle": "dummy_handle",
+    "xHandle": "dummy_handle",
+    "tiktokHandle": "dummy_handle",
+    "linkedinId": "dummy-handle",
+    "currentTotal": 379279,
+    "dailyChange": 1630,
+    "pctChange": 0.4316177190989517,
+    "platforms": {
+      "instagram": 152482,
+      "x": 65744,
+      "tiktok": 136303,
+      "linkedin": 24750
+    }
+  }
+]

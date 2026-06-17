@@ -1,0 +1,19 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "growth-history-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-15",
+  "triggers": {
+    "crons": ["0 1 * * *"] // Runs daily at 1:00 AM UTC
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "growth-history-db",
+      "database_id": "95740a33-cabc-4783-9300-c40c2199e3d1"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

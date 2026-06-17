@@ -1,0 +1,912 @@
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "date": "2026-03-19",
+    "instagram": 121098,
+    "x": 45464,
+    "tiktok": 81069,
+    "linkedin": 15432,
+    "aggregate": 263063
+  },
+  {
+    "id": 2,
+    "customer_id": 1,
+    "date": "2026-03-20",
+    "instagram": 121483,
+    "x": 45525,
+    "tiktok": 81993,
+    "linkedin": 15557,
+    "aggregate": 264558
+  },
+  {
+    "id": 3,
+    "customer_id": 1,
+    "date": "2026-03-21",
+    "instagram": 121863,
+    "x": 45723,
+    "tiktok": 82412,
+    "linkedin": 15593,
+    "aggregate": 265591
+  },
+  {
+    "id": 4,
+    "customer_id": 1,
+    "date": "2026-03-22",
+    "instagram": 122348,
+    "x": 45814,
+    "tiktok": 82805,
+    "linkedin": 15640,
+    "aggregate": 266607
+  },
+  {
+    "id": 5,
+    "customer_id": 1,
+    "date": "2026-03-23",
+    "instagram": 122797,
+    "x": 46138,
+    "tiktok": 83781,
+    "linkedin": 15732,
+    "aggregate": 268448
+  },
+  {
+    "id": 6,
+    "customer_id": 1,
+    "date": "2026-03-24",
+    "instagram": 123043,
+    "x": 46369,
+    "tiktok": 84284,
+    "linkedin": 15854,
+    "aggregate": 269550
+  },
+  {
+    "id": 7,
+    "customer_id": 1,
+    "date": "2026-03-25",
+    "instagram": 123580,
+    "x": 46565,
+    "tiktok": 84905,
+    "linkedin": 15927,
+    "aggregate": 270977
+  },
+  {
+    "id": 8,
+    "customer_id": 1,
+    "date": "2026-03-26",
+    "instagram": 123834,
+    "x": 46878,
+    "tiktok": 85855,
+    "linkedin": 16099,
+    "aggregate": 272666
+  },
+  {
+    "id": 9,
+    "customer_id": 1,
+    "date": "2026-03-27",
+    "instagram": 124100,
+    "x": 47019,
+    "tiktok": 86432,
+    "linkedin": 16172,
+    "aggregate": 273723
+  },
+  {
+    "id": 10,
+    "customer_id": 1,
+    "date": "2026-03-28",
+    "instagram": 124453,
+    "x": 47199,
+    "tiktok": 86944,
+    "linkedin": 16333,
+    "aggregate": 274929
+  },
+  {
+    "id": 11,
+    "customer_id": 1,
+    "date": "2026-03-29",
+    "instagram": 124612,
+    "x": 47480,
+    "tiktok": 87683,
+    "linkedin": 16399,
+    "aggregate": 276174
+  },
+  {
+    "id": 12,
+    "customer_id": 1,
+    "date": "2026-03-30",
+    "instagram": 125150,
+    "x": 47682,
+    "tiktok": 88368,
+    "linkedin": 16487,
+    "aggregate": 277687
+  },
+  {
+    "id": 13,
+    "customer_id": 1,
+    "date": "2026-03-31",
+    "instagram": 125312,
+    "x": 47982,
+    "tiktok": 89345,
+    "linkedin": 16637,
+    "aggregate": 279276
+  },
+  {
+    "id": 14,
+    "customer_id": 1,
+    "date": "2026-04-01",
+    "instagram": 125516,
+    "x": 48173,
+    "tiktok": 90247,
+    "linkedin": 16804,
+    "aggregate": 280740
+  },
+  {
+    "id": 15,
+    "customer_id": 1,
+    "date": "2026-04-02",
+    "instagram": 125618,
+    "x": 48324,
+    "tiktok": 90711,
+    "linkedin": 16941,
+    "aggregate": 281594
+  },
+  {
+    "id": 16,
+    "customer_id": 1,
+    "date": "2026-04-03",
+    "instagram": 125731,
+    "x": 48572,
+    "tiktok": 91422,
+    "linkedin": 17002,
+    "aggregate": 282727
+  },
+  {
+    "id": 17,
+    "customer_id": 1,
+    "date": "2026-04-04",
+    "instagram": 126200,
+    "x": 48770,
+    "tiktok": 92006,
+    "linkedin": 17038,
+    "aggregate": 284014
+  },
+  {
+    "id": 18,
+    "customer_id": 1,
+    "date": "2026-04-05",
+    "instagram": 126610,
+    "x": 49059,
+    "tiktok": 92981,
+    "linkedin": 17130,
+    "aggregate": 285780
+  },
+  {
+    "id": 19,
+    "customer_id": 1,
+    "date": "2026-04-06",
+    "instagram": 126814,
+    "x": 49297,
+    "tiktok": 93276,
+    "linkedin": 17221,
+    "aggregate": 286608
+  },
+  {
+    "id": 20,
+    "customer_id": 1,
+    "date": "2026-04-07",
+    "instagram": 127003,
+    "x": 49605,
+    "tiktok": 94135,
+    "linkedin": 17283,
+    "aggregate": 288026
+  },
+  {
+    "id": 21,
+    "customer_id": 1,
+    "date": "2026-04-08",
+    "instagram": 127137,
+    "x": 49844,
+    "tiktok": 94418,
+    "linkedin": 17347,
+    "aggregate": 288746
+  },
+  {
+    "id": 22,
+    "customer_id": 1,
+    "date": "2026-04-09",
+    "instagram": 127620,
+    "x": 50025,
+    "tiktok": 95067,
+    "linkedin": 17522,
+    "aggregate": 290234
+  },
+  {
+    "id": 23,
+    "customer_id": 1,
+    "date": "2026-04-10",
+    "instagram": 127783,
+    "x": 50138,
+    "tiktok": 96020,
+    "linkedin": 17672,
+    "aggregate": 291613
+  },
+  {
+    "id": 24,
+    "customer_id": 1,
+    "date": "2026-04-11",
+    "instagram": 128176,
+    "x": 50246,
+    "tiktok": 96256,
+    "linkedin": 17731,
+    "aggregate": 292409
+  },
+  {
+    "id": 25,
+    "customer_id": 1,
+    "date": "2026-04-12",
+    "instagram": 128624,
+    "x": 50566,
+    "tiktok": 96588,
+    "linkedin": 17835,
+    "aggregate": 293613
+  },
+  {
+    "id": 26,
+    "customer_id": 1,
+    "date": "2026-04-13",
+    "instagram": 128950,
+    "x": 50803,
+    "tiktok": 97224,
+    "linkedin": 17957,
+    "aggregate": 294934
+  },
+  {
+    "id": 27,
+    "customer_id": 1,
+    "date": "2026-04-14",
+    "instagram": 129537,
+    "x": 51010,
+    "tiktok": 97836,
+    "linkedin": 18103,
+    "aggregate": 296486
+  },
+  {
+    "id": 28,
+    "customer_id": 1,
+    "date": "2026-04-15",
+    "instagram": 129739,
+    "x": 51226,
+    "tiktok": 98458,
+    "linkedin": 18187,
+    "aggregate": 297610
+  },
+  {
+    "id": 29,
+    "customer_id": 1,
+    "date": "2026-04-16",
+    "instagram": 130090,
+    "x": 51517,
+    "tiktok": 99257,
+    "linkedin": 18303,
+    "aggregate": 299167
+  },
+  {
+    "id": 30,
+    "customer_id": 1,
+    "date": "2026-04-17",
+    "instagram": 130555,
+    "x": 51778,
+    "tiktok": 99588,
+    "linkedin": 18348,
+    "aggregate": 300269
+  },
+  {
+    "id": 31,
+    "customer_id": 1,
+    "date": "2026-04-18",
+    "instagram": 130660,
+    "x": 52017,
+    "tiktok": 99799,
+    "linkedin": 18434,
+    "aggregate": 300910
+  },
+  {
+    "id": 32,
+    "customer_id": 1,
+    "date": "2026-04-19",
+    "instagram": 131177,
+    "x": 52326,
+    "tiktok": 100537,
+    "linkedin": 18524,
+    "aggregate": 302564
+  },
+  {
+    "id": 33,
+    "customer_id": 1,
+    "date": "2026-04-20",
+    "instagram": 131758,
+    "x": 52417,
+    "tiktok": 100817,
+    "linkedin": 18686,
+    "aggregate": 303678
+  },
+  {
+    "id": 34,
+    "customer_id": 1,
+    "date": "2026-04-21",
+    "instagram": 132103,
+    "x": 52474,
+    "tiktok": 101537,
+    "linkedin": 18848,
+    "aggregate": 304962
+  },
+  {
+    "id": 35,
+    "customer_id": 1,
+    "date": "2026-04-22",
+    "instagram": 132436,
+    "x": 52688,
+    "tiktok": 102318,
+    "linkedin": 19024,
+    "aggregate": 306466
+  },
+  {
+    "id": 36,
+    "customer_id": 1,
+    "date": "2026-04-23",
+    "instagram": 132781,
+    "x": 52777,
+    "tiktok": 102976,
+    "linkedin": 19182,
+    "aggregate": 307716
+  },
+  {
+    "id": 37,
+    "customer_id": 1,
+    "date": "2026-04-24",
+    "instagram": 132997,
+    "x": 52958,
+    "tiktok": 103707,
+    "linkedin": 19235,
+    "aggregate": 308897
+  },
+  {
+    "id": 38,
+    "customer_id": 1,
+    "date": "2026-04-25",
+    "instagram": 133173,
+    "x": 53060,
+    "tiktok": 104569,
+    "linkedin": 19320,
+    "aggregate": 310122
+  },
+  {
+    "id": 39,
+    "customer_id": 1,
+    "date": "2026-04-26",
+    "instagram": 133585,
+    "x": 53280,
+    "tiktok": 105351,
+    "linkedin": 19409,
+    "aggregate": 311625
+  },
+  {
+    "id": 40,
+    "customer_id": 1,
+    "date": "2026-04-27",
+    "instagram": 133735,
+    "x": 53452,
+    "tiktok": 106148,
+    "linkedin": 19475,
+    "aggregate": 312810
+  },
+  {
+    "id": 41,
+    "customer_id": 1,
+    "date": "2026-04-28",
+    "instagram": 133865,
+    "x": 53505,
+    "tiktok": 106478,
+    "linkedin": 19592,
+    "aggregate": 313440
+  },
+  {
+    "id": 42,
+    "customer_id": 1,
+    "date": "2026-04-29",
+    "instagram": 134158,
+    "x": 53660,
+    "tiktok": 107400,
+    "linkedin": 19670,
+    "aggregate": 314888
+  },
+  {
+    "id": 43,
+    "customer_id": 1,
+    "date": "2026-04-30",
+    "instagram": 134618,
+    "x": 53816,
+    "tiktok": 107817,
+    "linkedin": 19799,
+    "aggregate": 316050
+  },
+  {
+    "id": 44,
+    "customer_id": 1,
+    "date": "2026-05-01",
+    "instagram": 134785,
+    "x": 54143,
+    "tiktok": 108348,
+    "linkedin": 19904,
+    "aggregate": 317180
+  },
+  {
+    "id": 45,
+    "customer_id": 1,
+    "date": "2026-05-02",
+    "instagram": 135335,
+    "x": 54321,
+    "tiktok": 108840,
+    "linkedin": 19993,
+    "aggregate": 318489
+  },
+  {
+    "id": 46,
+    "customer_id": 1,
+    "date": "2026-05-03",
+    "instagram": 135493,
+    "x": 54501,
+    "tiktok": 109679,
+    "linkedin": 20162,
+    "aggregate": 319835
+  },
+  {
+    "id": 47,
+    "customer_id": 1,
+    "date": "2026-05-04",
+    "instagram": 136084,
+    "x": 54597,
+    "tiktok": 110216,
+    "linkedin": 20278,
+    "aggregate": 321175
+  },
+  {
+    "id": 48,
+    "customer_id": 1,
+    "date": "2026-05-05",
+    "instagram": 136531,
+    "x": 54812,
+    "tiktok": 110908,
+    "linkedin": 20447,
+    "aggregate": 322698
+  },
+  {
+    "id": 49,
+    "customer_id": 1,
+    "date": "2026-05-06",
+    "instagram": 137059,
+    "x": 54926,
+    "tiktok": 111719,
+    "linkedin": 20557,
+    "aggregate": 324261
+  },
+  {
+    "id": 50,
+    "customer_id": 1,
+    "date": "2026-05-07",
+    "instagram": 137365,
+    "x": 54998,
+    "tiktok": 112580,
+    "linkedin": 20593,
+    "aggregate": 325536
+  },
+  {
+    "id": 51,
+    "customer_id": 1,
+    "date": "2026-05-08",
+    "instagram": 137488,
+    "x": 55111,
+    "tiktok": 112867,
+    "linkedin": 20639,
+    "aggregate": 326105
+  },
+  {
+    "id": 52,
+    "customer_id": 1,
+    "date": "2026-05-09",
+    "instagram": 137936,
+    "x": 55454,
+    "tiktok": 113384,
+    "linkedin": 20703,
+    "aggregate": 327477
+  },
+  {
+    "id": 53,
+    "customer_id": 1,
+    "date": "2026-05-10",
+    "instagram": 138173,
+    "x": 55661,
+    "tiktok": 113807,
+    "linkedin": 20869,
+    "aggregate": 328510
+  },
+  {
+    "id": 54,
+    "customer_id": 1,
+    "date": "2026-05-11",
+    "instagram": 138297,
+    "x": 56006,
+    "tiktok": 114335,
+    "linkedin": 20952,
+    "aggregate": 329590
+  },
+  {
+    "id": 55,
+    "customer_id": 1,
+    "date": "2026-05-12",
+    "instagram": 138760,
+    "x": 56304,
+    "tiktok": 114620,
+    "linkedin": 21066,
+    "aggregate": 330750
+  },
+  {
+    "id": 56,
+    "customer_id": 1,
+    "date": "2026-05-13",
+    "instagram": 139036,
+    "x": 56548,
+    "tiktok": 115118,
+    "linkedin": 21203,
+    "aggregate": 331905
+  },
+  {
+    "id": 57,
+    "customer_id": 1,
+    "date": "2026-05-14",
+    "instagram": 139178,
+    "x": 56661,
+    "tiktok": 115546,
+    "linkedin": 21311,
+    "aggregate": 332696
+  },
+  {
+    "id": 58,
+    "customer_id": 1,
+    "date": "2026-05-15",
+    "instagram": 139587,
+    "x": 56761,
+    "tiktok": 116187,
+    "linkedin": 21356,
+    "aggregate": 333891
+  },
+  {
+    "id": 59,
+    "customer_id": 1,
+    "date": "2026-05-16",
+    "instagram": 140108,
+    "x": 56990,
+    "tiktok": 116416,
+    "linkedin": 21526,
+    "aggregate": 335040
+  },
+  {
+    "id": 60,
+    "customer_id": 1,
+    "date": "2026-05-17",
+    "instagram": 140357,
+    "x": 57058,
+    "tiktok": 116694,
+    "linkedin": 21598,
+    "aggregate": 335707
+  },
+  {
+    "id": 61,
+    "customer_id": 1,
+    "date": "2026-05-18",
+    "instagram": 140882,
+    "x": 57383,
+    "tiktok": 117507,
+    "linkedin": 21691,
+    "aggregate": 337463
+  },
+  {
+    "id": 62,
+    "customer_id": 1,
+    "date": "2026-05-19",
+    "instagram": 141368,
+    "x": 57696,
+    "tiktok": 118135,
+    "linkedin": 21747,
+    "aggregate": 338946
+  },
+  {
+    "id": 63,
+    "customer_id": 1,
+    "date": "2026-05-20",
+    "instagram": 141745,
+    "x": 57834,
+    "tiktok": 118759,
+    "linkedin": 21777,
+    "aggregate": 340115
+  },
+  {
+    "id": 64,
+    "customer_id": 1,
+    "date": "2026-05-21",
+    "instagram": 142239,
+    "x": 58058,
+    "tiktok": 119322,
+    "linkedin": 21883,
+    "aggregate": 341502
+  },
+  {
+    "id": 65,
+    "customer_id": 1,
+    "date": "2026-05-22",
+    "instagram": 142600,
+    "x": 58126,
+    "tiktok": 120155,
+    "linkedin": 21962,
+    "aggregate": 342843
+  },
+  {
+    "id": 66,
+    "customer_id": 1,
+    "date": "2026-05-23",
+    "instagram": 143123,
+    "x": 58244,
+    "tiktok": 120890,
+    "linkedin": 21994,
+    "aggregate": 344251
+  },
+  {
+    "id": 67,
+    "customer_id": 1,
+    "date": "2026-05-24",
+    "instagram": 143387,
+    "x": 58429,
+    "tiktok": 121407,
+    "linkedin": 22113,
+    "aggregate": 345336
+  },
+  {
+    "id": 68,
+    "customer_id": 1,
+    "date": "2026-05-25",
+    "instagram": 143656,
+    "x": 58510,
+    "tiktok": 121758,
+    "linkedin": 22235,
+    "aggregate": 346159
+  },
+  {
+    "id": 69,
+    "customer_id": 1,
+    "date": "2026-05-26",
+    "instagram": 143862,
+    "x": 58658,
+    "tiktok": 122738,
+    "linkedin": 22385,
+    "aggregate": 347643
+  },
+  {
+    "id": 70,
+    "customer_id": 1,
+    "date": "2026-05-27",
+    "instagram": 144314,
+    "x": 59000,
+    "tiktok": 123553,
+    "linkedin": 22469,
+    "aggregate": 349336
+  },
+  {
+    "id": 71,
+    "customer_id": 1,
+    "date": "2026-05-28",
+    "instagram": 144631,
+    "x": 59136,
+    "tiktok": 124404,
+    "linkedin": 22642,
+    "aggregate": 350813
+  },
+  {
+    "id": 72,
+    "customer_id": 1,
+    "date": "2026-05-29",
+    "instagram": 144875,
+    "x": 60773,
+    "tiktok": 124751,
+    "linkedin": 22770,
+    "aggregate": 353169
+  },
+  {
+    "id": 73,
+    "customer_id": 1,
+    "date": "2026-05-30",
+    "instagram": 145145,
+    "x": 60841,
+    "tiktok": 124992,
+    "linkedin": 22815,
+    "aggregate": 353793
+  },
+  {
+    "id": 74,
+    "customer_id": 1,
+    "date": "2026-05-31",
+    "instagram": 145536,
+    "x": 61141,
+    "tiktok": 125494,
+    "linkedin": 22846,
+    "aggregate": 355017
+  },
+  {
+    "id": 75,
+    "customer_id": 1,
+    "date": "2026-06-01",
+    "instagram": 146104,
+    "x": 61307,
+    "tiktok": 126206,
+    "linkedin": 23025,
+    "aggregate": 356642
+  },
+  {
+    "id": 76,
+    "customer_id": 1,
+    "date": "2026-06-02",
+    "instagram": 146619,
+    "x": 61635,
+    "tiktok": 127018,
+    "linkedin": 23109,
+    "aggregate": 358381
+  },
+  {
+    "id": 77,
+    "customer_id": 1,
+    "date": "2026-06-03",
+    "instagram": 147140,
+    "x": 61833,
+    "tiktok": 127769,
+    "linkedin": 23239,
+    "aggregate": 359981
+  },
+  {
+    "id": 78,
+    "customer_id": 1,
+    "date": "2026-06-04",
+    "instagram": 147446,
+    "x": 62043,
+    "tiktok": 128673,
+    "linkedin": 23287,
+    "aggregate": 361449
+  },
+  {
+    "id": 79,
+    "customer_id": 1,
+    "date": "2026-06-05",
+    "instagram": 147921,
+    "x": 62836,
+    "tiktok": 129294,
+    "linkedin": 23415,
+    "aggregate": 363466
+  },
+  {
+    "id": 80,
+    "customer_id": 1,
+    "date": "2026-06-06",
+    "instagram": 148092,
+    "x": 63142,
+    "tiktok": 130236,
+    "linkedin": 23466,
+    "aggregate": 364936
+  },
+  {
+    "id": 81,
+    "customer_id": 1,
+    "date": "2026-06-07",
+    "instagram": 148209,
+    "x": 63214,
+    "tiktok": 130575,
+    "linkedin": 23625,
+    "aggregate": 365623
+  },
+  {
+    "id": 82,
+    "customer_id": 1,
+    "date": "2026-06-08",
+    "instagram": 148734,
+    "x": 63537,
+    "tiktok": 130854,
+    "linkedin": 23720,
+    "aggregate": 366845
+  },
+  {
+    "id": 83,
+    "customer_id": 1,
+    "date": "2026-06-09",
+    "instagram": 149216,
+    "x": 63809,
+    "tiktok": 131693,
+    "linkedin": 23822,
+    "aggregate": 368540
+  },
+  {
+    "id": 84,
+    "customer_id": 1,
+    "date": "2026-06-10",
+    "instagram": 149758,
+    "x": 64109,
+    "tiktok": 132540,
+    "linkedin": 23978,
+    "aggregate": 370385
+  },
+  {
+    "id": 85,
+    "customer_id": 1,
+    "date": "2026-06-11",
+    "instagram": 149865,
+    "x": 64197,
+    "tiktok": 132797,
+    "linkedin": 24152,
+    "aggregate": 371011
+  },
+  {
+    "id": 86,
+    "customer_id": 1,
+    "date": "2026-06-12",
+    "instagram": 150439,
+    "x": 64442,
+    "tiktok": 133760,
+    "linkedin": 24322,
+    "aggregate": 372963
+  },
+  {
+    "id": 87,
+    "customer_id": 1,
+    "date": "2026-06-13",
+    "instagram": 150762,
+    "x": 64785,
+    "tiktok": 134083,
+    "linkedin": 24384,
+    "aggregate": 374014
+  },
+  {
+    "id": 88,
+    "customer_id": 1,
+    "date": "2026-06-14",
+    "instagram": 151152,
+    "x": 64955,
+    "tiktok": 134691,
+    "linkedin": 24415,
+    "aggregate": 375213
+  },
+  {
+    "id": 89,
+    "customer_id": 1,
+    "date": "2026-06-15",
+    "instagram": 151735,
+    "x": 65112,
+    "tiktok": 135165,
+    "linkedin": 24490,
+    "aggregate": 376502
+  },
+  {
+    "id": 90,
+    "customer_id": 1,
+    "date": "2026-06-16",
+    "instagram": 152025,
+    "x": 65534,
+    "tiktok": 135495,
+    "linkedin": 24595,
+    "aggregate": 377649
+  },
+  {
+    "id": 91,
+    "customer_id": 1,
+    "date": "2026-06-17",
+    "instagram": 152482,
+    "x": 65744,
+    "tiktok": 136303,
+    "linkedin": 24750,
+    "aggregate": 379279
+  }
+]

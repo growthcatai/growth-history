@@ -1,0 +1,730 @@
+[
+  {
+    "date": "2026-03-17",
+    "instagram": 120703,
+    "x": 45515,
+    "tiktok": 80325,
+    "linkedin": 15395,
+    "aggregate": 261938
+  },
+  {
+    "date": "2026-03-18",
+    "instagram": 121150,
+    "x": 45603,
+    "tiktok": 80855,
+    "linkedin": 15535,
+    "aggregate": 263143
+  },
+  {
+    "date": "2026-03-19",
+    "instagram": 121347,
+    "x": 45862,
+    "tiktok": 81605,
+    "linkedin": 15641,
+    "aggregate": 264455
+  },
+  {
+    "date": "2026-03-20",
+    "instagram": 121885,
+    "x": 46061,
+    "tiktok": 81937,
+    "linkedin": 15812,
+    "aggregate": 265695
+  },
+  {
+    "date": "2026-03-21",
+    "instagram": 122432,
+    "x": 46191,
+    "tiktok": 82550,
+    "linkedin": 15943,
+    "aggregate": 267116
+  },
+  {
+    "date": "2026-03-22",
+    "instagram": 122643,
+    "x": 46306,
+    "tiktok": 83067,
+    "linkedin": 16113,
+    "aggregate": 268129
+  },
+  {
+    "date": "2026-03-23",
+    "instagram": 122798,
+    "x": 46488,
+    "tiktok": 83868,
+    "linkedin": 16215,
+    "aggregate": 269369
+  },
+  {
+    "date": "2026-03-24",
+    "instagram": 123223,
+    "x": 46586,
+    "tiktok": 84443,
+    "linkedin": 16307,
+    "aggregate": 270559
+  },
+  {
+    "date": "2026-03-25",
+    "instagram": 123516,
+    "x": 46929,
+    "tiktok": 85154,
+    "linkedin": 16444,
+    "aggregate": 272043
+  },
+  {
+    "date": "2026-03-26",
+    "instagram": 124038,
+    "x": 47266,
+    "tiktok": 86117,
+    "linkedin": 16503,
+    "aggregate": 273924
+  },
+  {
+    "date": "2026-03-27",
+    "instagram": 124364,
+    "x": 47327,
+    "tiktok": 86779,
+    "linkedin": 16597,
+    "aggregate": 275067
+  },
+  {
+    "date": "2026-03-28",
+    "instagram": 124523,
+    "x": 48013,
+    "tiktok": 87112,
+    "linkedin": 16751,
+    "aggregate": 276399
+  },
+  {
+    "date": "2026-03-29",
+    "instagram": 124672,
+    "x": 48316,
+    "tiktok": 87460,
+    "linkedin": 16806,
+    "aggregate": 277254
+  },
+  {
+    "date": "2026-03-30",
+    "instagram": 125129,
+    "x": 48607,
+    "tiktok": 88227,
+    "linkedin": 16865,
+    "aggregate": 278828
+  },
+  {
+    "date": "2026-03-31",
+    "instagram": 125708,
+    "x": 48715,
+    "tiktok": 89072,
+    "linkedin": 17016,
+    "aggregate": 280511
+  },
+  {
+    "date": "2026-04-01",
+    "instagram": 125837,
+    "x": 48889,
+    "tiktok": 89726,
+    "linkedin": 17077,
+    "aggregate": 281529
+  },
+  {
+    "date": "2026-04-02",
+    "instagram": 126001,
+    "x": 49206,
+    "tiktok": 90384,
+    "linkedin": 17233,
+    "aggregate": 282824
+  },
+  {
+    "date": "2026-04-03",
+    "instagram": 126503,
+    "x": 49328,
+    "tiktok": 90930,
+    "linkedin": 17332,
+    "aggregate": 284093
+  },
+  {
+    "date": "2026-04-04",
+    "instagram": 127002,
+    "x": 49660,
+    "tiktok": 91491,
+    "linkedin": 17367,
+    "aggregate": 285520
+  },
+  {
+    "date": "2026-04-05",
+    "instagram": 127165,
+    "x": 49846,
+    "tiktok": 92316,
+    "linkedin": 17520,
+    "aggregate": 286847
+  },
+  {
+    "date": "2026-04-06",
+    "instagram": 127383,
+    "x": 50131,
+    "tiktok": 92687,
+    "linkedin": 17685,
+    "aggregate": 287886
+  },
+  {
+    "date": "2026-04-07",
+    "instagram": 127552,
+    "x": 50346,
+    "tiktok": 93066,
+    "linkedin": 17861,
+    "aggregate": 288825
+  },
+  {
+    "date": "2026-04-08",
+    "instagram": 127925,
+    "x": 50496,
+    "tiktok": 94001,
+    "linkedin": 17926,
+    "aggregate": 290348
+  },
+  {
+    "date": "2026-04-09",
+    "instagram": 128039,
+    "x": 50612,
+    "tiktok": 94608,
+    "linkedin": 18003,
+    "aggregate": 291262
+  },
+  {
+    "date": "2026-04-10",
+    "instagram": 128367,
+    "x": 50849,
+    "tiktok": 95518,
+    "linkedin": 18150,
+    "aggregate": 292884
+  },
+  {
+    "date": "2026-04-11",
+    "instagram": 128581,
+    "x": 50920,
+    "tiktok": 96217,
+    "linkedin": 18193,
+    "aggregate": 293911
+  },
+  {
+    "date": "2026-04-12",
+    "instagram": 128749,
+    "x": 52129,
+    "tiktok": 97156,
+    "linkedin": 18314,
+    "aggregate": 296348
+  },
+  {
+    "date": "2026-04-13",
+    "instagram": 129017,
+    "x": 52248,
+    "tiktok": 97916,
+    "linkedin": 18476,
+    "aggregate": 297657
+  },
+  {
+    "date": "2026-04-14",
+    "instagram": 129376,
+    "x": 52510,
+    "tiktok": 98491,
+    "linkedin": 18600,
+    "aggregate": 298977
+  },
+  {
+    "date": "2026-04-15",
+    "instagram": 129735,
+    "x": 54258,
+    "tiktok": 99196,
+    "linkedin": 18662,
+    "aggregate": 301851
+  },
+  {
+    "date": "2026-04-16",
+    "instagram": 129854,
+    "x": 54420,
+    "tiktok": 99814,
+    "linkedin": 18815,
+    "aggregate": 302903
+  },
+  {
+    "date": "2026-04-17",
+    "instagram": 130317,
+    "x": 54718,
+    "tiktok": 100437,
+    "linkedin": 18889,
+    "aggregate": 304361
+  },
+  {
+    "date": "2026-04-18",
+    "instagram": 130771,
+    "x": 54877,
+    "tiktok": 101223,
+    "linkedin": 18992,
+    "aggregate": 305863
+  },
+  {
+    "date": "2026-04-19",
+    "instagram": 131347,
+    "x": 55209,
+    "tiktok": 102173,
+    "linkedin": 19171,
+    "aggregate": 307900
+  },
+  {
+    "date": "2026-04-20",
+    "instagram": 131453,
+    "x": 55265,
+    "tiktok": 102495,
+    "linkedin": 19279,
+    "aggregate": 308492
+  },
+  {
+    "date": "2026-04-21",
+    "instagram": 131778,
+    "x": 55552,
+    "tiktok": 102699,
+    "linkedin": 19391,
+    "aggregate": 309420
+  },
+  {
+    "date": "2026-04-22",
+    "instagram": 131920,
+    "x": 55722,
+    "tiktok": 102920,
+    "linkedin": 19422,
+    "aggregate": 309984
+  },
+  {
+    "date": "2026-04-23",
+    "instagram": 132133,
+    "x": 56018,
+    "tiktok": 103838,
+    "linkedin": 19596,
+    "aggregate": 311585
+  },
+  {
+    "date": "2026-04-24",
+    "instagram": 132585,
+    "x": 56147,
+    "tiktok": 104118,
+    "linkedin": 19759,
+    "aggregate": 312609
+  },
+  {
+    "date": "2026-04-25",
+    "instagram": 132910,
+    "x": 56242,
+    "tiktok": 104927,
+    "linkedin": 19804,
+    "aggregate": 313883
+  },
+  {
+    "date": "2026-04-26",
+    "instagram": 133355,
+    "x": 56365,
+    "tiktok": 105408,
+    "linkedin": 19873,
+    "aggregate": 315001
+  },
+  {
+    "date": "2026-04-27",
+    "instagram": 133812,
+    "x": 56636,
+    "tiktok": 105645,
+    "linkedin": 20019,
+    "aggregate": 316112
+  },
+  {
+    "date": "2026-04-28",
+    "instagram": 134395,
+    "x": 56903,
+    "tiktok": 106236,
+    "linkedin": 20079,
+    "aggregate": 317613
+  },
+  {
+    "date": "2026-04-29",
+    "instagram": 134986,
+    "x": 57138,
+    "tiktok": 106443,
+    "linkedin": 20157,
+    "aggregate": 318724
+  },
+  {
+    "date": "2026-04-30",
+    "instagram": 135482,
+    "x": 57230,
+    "tiktok": 107284,
+    "linkedin": 20326,
+    "aggregate": 320322
+  },
+  {
+    "date": "2026-05-01",
+    "instagram": 136028,
+    "x": 57479,
+    "tiktok": 107621,
+    "linkedin": 20396,
+    "aggregate": 321524
+  },
+  {
+    "date": "2026-05-02",
+    "instagram": 136435,
+    "x": 57668,
+    "tiktok": 107881,
+    "linkedin": 20519,
+    "aggregate": 322503
+  },
+  {
+    "date": "2026-05-03",
+    "instagram": 136806,
+    "x": 57965,
+    "tiktok": 108365,
+    "linkedin": 20660,
+    "aggregate": 323796
+  },
+  {
+    "date": "2026-05-04",
+    "instagram": 136973,
+    "x": 58157,
+    "tiktok": 109084,
+    "linkedin": 20727,
+    "aggregate": 324941
+  },
+  {
+    "date": "2026-05-05",
+    "instagram": 137284,
+    "x": 58238,
+    "tiktok": 109821,
+    "linkedin": 20847,
+    "aggregate": 326190
+  },
+  {
+    "date": "2026-05-06",
+    "instagram": 137769,
+    "x": 58362,
+    "tiktok": 110208,
+    "linkedin": 20952,
+    "aggregate": 327291
+  },
+  {
+    "date": "2026-05-07",
+    "instagram": 137942,
+    "x": 58552,
+    "tiktok": 111139,
+    "linkedin": 21090,
+    "aggregate": 328723
+  },
+  {
+    "date": "2026-05-08",
+    "instagram": 138289,
+    "x": 58827,
+    "tiktok": 112108,
+    "linkedin": 21174,
+    "aggregate": 330398
+  },
+  {
+    "date": "2026-05-09",
+    "instagram": 138494,
+    "x": 58878,
+    "tiktok": 112909,
+    "linkedin": 21219,
+    "aggregate": 331500
+  },
+  {
+    "date": "2026-05-10",
+    "instagram": 138808,
+    "x": 58965,
+    "tiktok": 113262,
+    "linkedin": 21357,
+    "aggregate": 332392
+  },
+  {
+    "date": "2026-05-11",
+    "instagram": 139096,
+    "x": 59277,
+    "tiktok": 113472,
+    "linkedin": 21535,
+    "aggregate": 333380
+  },
+  {
+    "date": "2026-05-12",
+    "instagram": 139533,
+    "x": 59344,
+    "tiktok": 113723,
+    "linkedin": 21607,
+    "aggregate": 334207
+  },
+  {
+    "date": "2026-05-13",
+    "instagram": 139636,
+    "x": 60795,
+    "tiktok": 114341,
+    "linkedin": 21756,
+    "aggregate": 336528
+  },
+  {
+    "date": "2026-05-14",
+    "instagram": 140187,
+    "x": 62795,
+    "tiktok": 114732,
+    "linkedin": 21932,
+    "aggregate": 339646
+  },
+  {
+    "date": "2026-05-15",
+    "instagram": 140639,
+    "x": 62935,
+    "tiktok": 115137,
+    "linkedin": 21962,
+    "aggregate": 340673
+  },
+  {
+    "date": "2026-05-16",
+    "instagram": 140986,
+    "x": 63083,
+    "tiktok": 115502,
+    "linkedin": 22049,
+    "aggregate": 341620
+  },
+  {
+    "date": "2026-05-17",
+    "instagram": 141275,
+    "x": 63196,
+    "tiktok": 116048,
+    "linkedin": 22173,
+    "aggregate": 342692
+  },
+  {
+    "date": "2026-05-18",
+    "instagram": 141634,
+    "x": 63406,
+    "tiktok": 116646,
+    "linkedin": 22294,
+    "aggregate": 343980
+  },
+  {
+    "date": "2026-05-19",
+    "instagram": 142053,
+    "x": 63701,
+    "tiktok": 117273,
+    "linkedin": 22451,
+    "aggregate": 345478
+  },
+  {
+    "date": "2026-05-20",
+    "instagram": 142413,
+    "x": 63894,
+    "tiktok": 118171,
+    "linkedin": 22618,
+    "aggregate": 347096
+  },
+  {
+    "date": "2026-05-21",
+    "instagram": 142723,
+    "x": 63993,
+    "tiktok": 118789,
+    "linkedin": 22718,
+    "aggregate": 348223
+  },
+  {
+    "date": "2026-05-22",
+    "instagram": 143278,
+    "x": 64282,
+    "tiktok": 119782,
+    "linkedin": 22821,
+    "aggregate": 350163
+  },
+  {
+    "date": "2026-05-23",
+    "instagram": 143623,
+    "x": 64487,
+    "tiktok": 120621,
+    "linkedin": 22991,
+    "aggregate": 351722
+  },
+  {
+    "date": "2026-05-24",
+    "instagram": 143787,
+    "x": 64601,
+    "tiktok": 120852,
+    "linkedin": 23110,
+    "aggregate": 352350
+  },
+  {
+    "date": "2026-05-25",
+    "instagram": 144036,
+    "x": 65513,
+    "tiktok": 121421,
+    "linkedin": 23264,
+    "aggregate": 354234
+  },
+  {
+    "date": "2026-05-26",
+    "instagram": 144436,
+    "x": 65819,
+    "tiktok": 122174,
+    "linkedin": 23420,
+    "aggregate": 355849
+  },
+  {
+    "date": "2026-05-27",
+    "instagram": 144894,
+    "x": 65962,
+    "tiktok": 123094,
+    "linkedin": 23476,
+    "aggregate": 357426
+  },
+  {
+    "date": "2026-05-28",
+    "instagram": 145071,
+    "x": 67970,
+    "tiktok": 123668,
+    "linkedin": 23614,
+    "aggregate": 360323
+  },
+  {
+    "date": "2026-05-29",
+    "instagram": 145426,
+    "x": 68236,
+    "tiktok": 123918,
+    "linkedin": 23737,
+    "aggregate": 361317
+  },
+  {
+    "date": "2026-05-30",
+    "instagram": 146016,
+    "x": 68480,
+    "tiktok": 124688,
+    "linkedin": 23817,
+    "aggregate": 363001
+  },
+  {
+    "date": "2026-05-31",
+    "instagram": 146443,
+    "x": 68795,
+    "tiktok": 125138,
+    "linkedin": 23849,
+    "aggregate": 364225
+  },
+  {
+    "date": "2026-06-01",
+    "instagram": 146748,
+    "x": 69120,
+    "tiktok": 125724,
+    "linkedin": 23909,
+    "aggregate": 365501
+  },
+  {
+    "date": "2026-06-02",
+    "instagram": 146996,
+    "x": 69389,
+    "tiktok": 126081,
+    "linkedin": 23985,
+    "aggregate": 366451
+  },
+  {
+    "date": "2026-06-03",
+    "instagram": 147216,
+    "x": 69667,
+    "tiktok": 126494,
+    "linkedin": 24080,
+    "aggregate": 367457
+  },
+  {
+    "date": "2026-06-04",
+    "instagram": 147815,
+    "x": 70013,
+    "tiktok": 126887,
+    "linkedin": 24186,
+    "aggregate": 368901
+  },
+  {
+    "date": "2026-06-05",
+    "instagram": 147948,
+    "x": 70064,
+    "tiktok": 127858,
+    "linkedin": 24240,
+    "aggregate": 370110
+  },
+  {
+    "date": "2026-06-06",
+    "instagram": 148204,
+    "x": 70261,
+    "tiktok": 128790,
+    "linkedin": 24387,
+    "aggregate": 371642
+  },
+  {
+    "date": "2026-06-07",
+    "instagram": 148369,
+    "x": 70487,
+    "tiktok": 129543,
+    "linkedin": 24520,
+    "aggregate": 372919
+  },
+  {
+    "date": "2026-06-08",
+    "instagram": 148708,
+    "x": 70766,
+    "tiktok": 130433,
+    "linkedin": 24619,
+    "aggregate": 374526
+  },
+  {
+    "date": "2026-06-09",
+    "instagram": 149003,
+    "x": 71051,
+    "tiktok": 131311,
+    "linkedin": 24769,
+    "aggregate": 376134
+  },
+  {
+    "date": "2026-06-10",
+    "instagram": 149371,
+    "x": 71174,
+    "tiktok": 132062,
+    "linkedin": 24944,
+    "aggregate": 377551
+  },
+  {
+    "date": "2026-06-11",
+    "instagram": 149899,
+    "x": 71360,
+    "tiktok": 132287,
+    "linkedin": 25018,
+    "aggregate": 378564
+  },
+  {
+    "date": "2026-06-12",
+    "instagram": 150054,
+    "x": 73567,
+    "tiktok": 133088,
+    "linkedin": 25085,
+    "aggregate": 381794
+  },
+  {
+    "date": "2026-06-13",
+    "instagram": 150418,
+    "x": 73752,
+    "tiktok": 133313,
+    "linkedin": 25153,
+    "aggregate": 382636
+  },
+  {
+    "date": "2026-06-14",
+    "instagram": 150618,
+    "x": 73914,
+    "tiktok": 133956,
+    "linkedin": 25255,
+    "aggregate": 383743
+  },
+  {
+    "date": "2026-06-15",
+    "instagram": 150820,
+    "x": 74052,
+    "tiktok": 134250,
+    "linkedin": 25317,
+    "aggregate": 384439
+  }
+]

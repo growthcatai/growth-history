@@ -1,0 +1,515 @@
+---
+import '../styles/global.css';
+import HeroChart from '../components/HeroChart.astro';
+import BreakdownMatrix from '../components/BreakdownMatrix.astro';
+import ShareButton from '../components/ShareButton.astro';
+import customersData from '../data/customers.json';
+import { env } from "cloudflare:workers";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+// 1. Try to find in statically generated customers
+let customer = customersData.find((c) => c.slug === slug);
+let historyData = null;
+
+if (customer) {
+  try {
+    historyData = (await import(`../data/history/${customer.slug}.json`)).default;
+  } catch (err) {
+    console.error(`Failed to import history for ${customer.slug}:`, err);
+  }
+} else {
+  // 2. Query Cloudflare D1 for user custom tracker
+  const d1 = (env as any).DB;
+  if (d1) {
+    try {
+      const tracker: any = await d1
+        .prepare("SELECT * FROM user_trackers WHERE slug = ?")
+        .bind(slug)
+        .first();
+
+      if (tracker) {
+        // Build customer structure matching what BreakdownMatrix / HeroChart expect
+        customer = {
+          id: tracker.id,
+          slug: tracker.slug,
+          name: tracker.name,
+          logoUrl: tracker.logoUrl,
+          instagramHandle: tracker.instagramHandle ? `@${tracker.instagramHandle}` : null,
+          xHandle: tracker.xHandle ? `@${tracker.xHandle}` : null,
+          tiktokHandle: tracker.tiktokHandle ? `@${tracker.tiktokHandle}` : null,
+          linkedinId: tracker.linkedinId || null,
+          currentTotal: 0,
+          dailyChange: 0,
+          pctChange: 0,
+          platforms: {
+            instagram: 0,
+            x: 0,
+            tiktok: 0,
+            linkedin: 0
+          }
+        };
+
+        // Generate deterministic history using slug as seed
+        historyData = generateServerSimulatedHistory({
+          x: tracker.xHandle,
+          instagram: tracker.instagramHandle,
+          tiktok: tracker.tiktokHandle,
+          linkedin: tracker.linkedinId
+        }, tracker.slug);
+
+        const latest = historyData[historyData.length - 1];
+        const previous = historyData[historyData.length - 2] || latest;
+        customer.currentTotal = latest.aggregate;
+        customer.dailyChange = latest.aggregate - previous.aggregate;
+        customer.pctChange = previous.aggregate > 0 ? (customer.dailyChange / previous.aggregate) * 100 : 0;
+        customer.platforms = {
+          instagram: latest.instagram,
+          x: latest.x,
+          tiktok: latest.tiktok,
+          linkedin: latest.linkedin
+        };
+      }
+    } catch (err) {
+      console.error("Failed to query D1 database in [slug].astro:", err);
+    }
+  }
+}
+
+if (!customer || !historyData) {
+  return Astro.redirect('/404');
+}
+
+// Simple hash code generator for seeding
+function hashCode(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash);
+}
+
+// Deterministic mock history generator
+function generateServerSimulatedHistory(handles: any, seedStr: string) {
+  const history = [];
+  const platforms = ['x', 'instagram', 'tiktok', 'linkedin'];
+  
+  const seed = hashCode(seedStr);
+  const random = (offset: number) => {
+    const x = Math.sin(seed + offset) * 10000;
+    return x - Math.floor(x);
+  };
+  
+  const baseValues: any = {
+    x: handles.x ? Math.floor(random(1) * 240000) + 10000 : 0,
+    instagram: handles.instagram ? Math.floor(random(2) * 385000) + 15000 : 0,
+    tiktok: handles.tiktok ? Math.floor(random(3) * 480000) + 20000 : 0,
+    linkedin: handles.linkedin ? Math.floor(random(4) * 145000) + 5000 : 0
+  };
+  
+  const dailyDeltas: any = {
+    x: handles.x ? Math.floor(random(5) * 750) + 50 : 0,
+    instagram: handles.instagram ? Math.floor(random(6) * 1400) + 100 : 0,
+    tiktok: handles.tiktok ? Math.floor(random(7) * 2350) + 150 : 0,
+    linkedin: handles.linkedin ? Math.floor(random(8) * 380) + 20 : 0
+  };
+
+  for (let i = 14; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    
+    const dailyValues: any = {};
+    let dailyAggregate = 0;
+    
+    platforms.forEach((platform, pIdx) => {
+      if (baseValues[platform] > 0) {
+        const dayOffset = 14 - i;
+        const noise = Math.floor((random(9 + dayOffset + pIdx) - 0.5) * (dailyDeltas[platform] * 0.3));
+        const val = baseValues[platform] + (dailyDeltas[platform] * dayOffset) + noise;
+        dailyValues[platform] = Math.max(0, val);
+        dailyAggregate += dailyValues[platform];
+      } else {
+        dailyValues[platform] = 0;
+      }
+    });
+
+    history.push({
+      date: dateStr,
+      instagram: dailyValues.instagram,
+      x: dailyValues.x,
+      tiktok: dailyValues.tiktok,
+      linkedin: dailyValues.linkedin,
+      aggregate: dailyAggregate
+    });
+  }
+  
+  return history;
+}
+
+// SEO Title and Meta details
+const pageTitle = `${customer.name} Follower Growth & History Analytics`;
+const pageDescription = `Track the real-time aggregate reach and daily growth history metrics for ${customer.name} across Instagram, X, TikTok, and LinkedIn.`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <!-- SEO Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`https://growth-history.com/${customer.slug}/`} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  
+  <body>
+    <header class="app-header">
+      <div class="header-container">
+        <!-- Back to Directory Link / Brand Logo -->
+        <a href="/" class="brand-logo" id="logo-home-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            <defs>
+              <linearGradient id="logoGradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#8B5CF6" />
+                <stop offset="100%" stop-color="#EC4899" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-text">Growth<span class="gradient-text">History</span></span>
+        </a>
+
+        <!-- Share button loaded as an Astro Island -->
+        <ShareButton />
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="profile-header-section">
+        <div class="back-navigation">
+          <a href="/" class="btn-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="back-arrow-icon">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Directory
+          </a>
+        </div>
+        
+        <h1 class="profile-title">{customer.name}</h1>
+        <p class="profile-subtitle">Live analytics dashboard for audience velocity and distribution</p>
+      </div>
+
+      <!-- The shareable card container captured by html2canvas -->
+      <div id="shareable-container" class="capture-wrapper">
+        
+        <!-- Watermark Header (visible only during capture) -->
+        <div class="capture-watermark-header">
+          <div class="watermark-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#watermarkGrad)" stroke-width="2.5" class="watermark-logo-icon">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              <defs>
+                <linearGradient id="watermarkGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#8B5CF6" />
+                  <stop offset="100%" stop-color="#EC4899" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>Growth<strong>History</strong></span>
+          </div>
+          <span class="watermark-domain">{customer.name} (growth-history.com/{customer.slug}/)</span>
+        </div>
+
+        <!-- Hero Chart showing combined/aggregate follower count -->
+        <HeroChart history={historyData} />
+
+        <!-- Breakdown Matrix showing individual platform metrics -->
+        <BreakdownMatrix history={historyData} />
+
+        <!-- Watermark Footer (visible only during capture) -->
+        <div class="capture-watermark-footer">
+          <span class="watermark-phrase">Growth is not luck.</span>
+          <span class="watermark-credit">Powered by the Growthcat.ai System</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-container">
+        <p class="footer-copy">&copy; {new Date().getFullYear()} Growth History. All rights reserved.</p>
+        <div class="footer-credit">
+          <a href="https://growthcat.ai" class="follow-backlink" id="growthcat-backlink" target="_blank" rel="noopener">
+            Powered by the <span class="credit-highlight">Growthcat.ai System</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /* Header Styles */
+  .app-header {
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(3, 0, 20, 0.5);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .gradient-text {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Main Layout */
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px 24px;
+  }
+
+  .profile-header-section {
+    margin-bottom: 40px;
+  }
+
+  .back-navigation {
+    margin-bottom: 20px;
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .btn-back:hover {
+    color: #ffffff;
+  }
+
+  .back-arrow-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-back:hover .back-arrow-icon {
+    transform: translateX(-2px);
+  }
+
+  .profile-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .profile-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  /* Capture Wrapper */
+  .capture-wrapper {
+    position: relative;
+    border-radius: 28px;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+  }
+
+  .capture-wrapper.capturing {
+    padding: 40px;
+    background-color: #030014 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .capture-wrapper.capturing :global(.glass-panel) {
+    background: rgba(15, 15, 25, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* Watermark styles (Hidden by default, shown ONLY during capture) */
+  .capture-watermark-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .capture-wrapper.capturing .capture-watermark-header {
+    display: flex;
+  }
+
+  .watermark-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  .watermark-logo-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .watermark-brand strong {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+
+  .watermark-domain {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .capture-watermark-footer {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .capture-wrapper.capturing .capture-watermark-footer {
+    display: flex;
+  }
+
+  .watermark-phrase {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-style: italic;
+    background: linear-gradient(90deg, #f09433, #dc2743, #cc2366, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .watermark-credit {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+  }
+
+  /* App Footer */
+  .app-footer {
+    border-top: 1px solid var(--border-color);
+    background: rgba(3, 0, 20, 0.8);
+    margin-top: auto;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0;
+    }
+  }
+
+  .footer-copy {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .follow-backlink {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .credit-highlight {
+    color: #ff5a00;
+    font-weight: 700;
+    margin-left: 4px;
+    text-shadow: 0 0 10px rgba(255, 90, 0, 0.2);
+  }
+
+  .follow-backlink:hover {
+    color: #ffffff;
+  }
+</style>

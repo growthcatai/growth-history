@@ -1,0 +1,421 @@
+---
+interface Props {
+  history: Array<{
+    date: string;
+    instagram: number;
+    x: number;
+    tiktok: number;
+    linkedin: number;
+    aggregate: number;
+  }>;
+}
+
+const { history } = Astro.props;
+
+if (!history || history.length === 0) {
+  throw new Error("HeroChart requires history data");
+}
+
+const latestTotal = history[history.length - 1].aggregate;
+const formattedLatestTotal = latestTotal.toLocaleString();
+
+// Chart Dimensions
+const width = 1000;
+const height = 400;
+const padding = { top: 40, right: 40, bottom: 60, left: 85 };
+const plotWidth = width - padding.left - padding.right;
+const plotHeight = height - padding.top - padding.bottom;
+
+// Calculations
+const aggregates = history.map(h => h.aggregate);
+const maxAggregate = Math.max(...aggregates);
+const minAggregate = Math.min(...aggregates);
+
+// Buffer so line doesn't clip
+const range = maxAggregate - minAggregate;
+const yBuffer = range * 0.1 || 10000;
+const yMax = maxAggregate + yBuffer;
+const yMin = Math.max(0, minAggregate - yBuffer);
+
+// Map history points to SVG coordinates
+const points = history.map((item, index) => {
+  const x = padding.left + (index / (history.length - 1)) * plotWidth;
+  const y = padding.top + plotHeight - ((item.aggregate - yMin) / (yMax - yMin)) * plotHeight;
+  return { x, y, item, index };
+});
+
+// Construct SVG paths
+const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+const fillPath = `${linePath} L ${points[points.length - 1].x.toFixed(1)} ${(padding.top + plotHeight).toFixed(1)} L ${points[0].x.toFixed(1)} ${(padding.top + plotHeight).toFixed(1)} Z`;
+
+// X-axis Grid and Labels (5 labels)
+const xLabelCount = 5;
+const xLabelIndices = Array.from({ length: xLabelCount }, (_, i) => 
+  Math.min(Math.floor((i / (xLabelCount - 1)) * (history.length - 1)), history.length - 1)
+);
+
+// Y-axis Grid and Labels (5 levels)
+const yLabelCount = 5;
+const yLabels = Array.from({ length: yLabelCount }, (_, i) => {
+  const value = yMin + (i / (yLabelCount - 1)) * (yMax - yMin);
+  const y = padding.top + plotHeight - (i / (yLabelCount - 1)) * plotHeight;
+  return { value, y };
+});
+
+// Helper formatting functions
+function formatBigNumber(num: number) {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(2).replace(/\.00$/, '') + 'M';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return num.toString();
+}
+
+function formatLabelDate(dateStr: string) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+---
+
+<div class="chart-container glass-panel" id="main-chart-card">
+  <div class="chart-header">
+    <div class="chart-title-area">
+      <h3>Total Audience Size</h3>
+    </div>
+    <div class="total-followers-display">
+      <span class="total-followers-count">{formattedLatestTotal}</span>
+      <span class="total-followers-label">Followers</span>
+    </div>
+  </div>
+
+  <div class="svg-wrapper">
+    <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%" class="growth-svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <!-- Background radial glow -->
+        <radialGradient id="bgGlow" cx="50%" cy="40%" r="50%">
+          <stop offset="0%" stop-color="rgba(139, 92, 246, 0.15)" />
+          <stop offset="100%" stop-color="rgba(3, 0, 20, 0)" />
+        </radialGradient>
+
+        <!-- Under-the-line gradient -->
+        <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(236, 72, 153, 0.25)" />
+          <stop offset="50%" stop-color="rgba(139, 92, 246, 0.1)" />
+          <stop offset="100%" stop-color="rgba(139, 92, 246, 0)" />
+        </linearGradient>
+
+        <!-- Bold line path gradient -->
+        <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="35%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#EC4899" />
+        </linearGradient>
+
+        <!-- Glow filter -->
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Radial background inside the chart -->
+      <rect x={padding.left} y={padding.top} width={plotWidth} height={plotHeight} fill="url(#bgGlow)" />
+
+      <!-- Horizontal gridlines and Y labels -->
+      {yLabels.map((label) => (
+        <g class="grid-group">
+          <line 
+            x1={padding.left} 
+            y1={label.y} 
+            x2={width - padding.right} 
+            y2={label.y} 
+            class="grid-line"
+          />
+          <text 
+            x={padding.left - 15} 
+            y={label.y + 4} 
+            class="axis-text y-axis-text"
+          >
+            {formatBigNumber(label.value)}
+          </text>
+        </g>
+      ))}
+
+      <!-- Vertical gridlines for X labels -->
+      {xLabelIndices.map((idx) => {
+        const p = points[idx];
+        return (
+          <g class="grid-group">
+            <line 
+              x1={p.x} 
+              y1={padding.top} 
+              x2={p.x} 
+              y2={padding.top + plotHeight} 
+              class="grid-line"
+            />
+            <text 
+              x={p.x} 
+              y={padding.top + plotHeight + 25} 
+              class="axis-text x-axis-text"
+            >
+              {formatLabelDate(p.item.date)}
+            </text>
+          </g>
+        );
+      })}
+
+      <!-- Area fill path under chart -->
+      <path d={fillPath} fill="url(#areaGradient)" />
+
+      <!-- The glow line behind the main path -->
+      <path d={linePath} fill="none" stroke="url(#lineGradient)" stroke-width="8" stroke-linecap="round" opacity="0.3" filter="url(#glow)" />
+
+      <!-- The main stroke path -->
+      <path d={linePath} fill="none" stroke="url(#lineGradient)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Interactive CSS points triggers -->
+      <g class="interactive-triggers">
+        {points.map((p) => {
+          // Adjust tooltip position offset if it is close to the edges
+          let tooltipOffsetX = 0;
+          if (p.index < 5) tooltipOffsetX = 25; // shift right
+          else if (p.index > history.length - 6) tooltipOffsetX = -25; // shift left
+
+          return (
+            <g class="point-trigger">
+              <!-- Vertical tracker line -->
+              <line 
+                x1={p.x} 
+                y1={padding.top} 
+                x2={p.x} 
+                y2={padding.top + plotHeight} 
+                class="hover-line" 
+              />
+              
+              <!-- Glow circle on point -->
+              <circle cx={p.x} cy={p.y} r="8" class="hover-glow-dot" />
+              <circle cx={p.x} cy={p.y} r="3.5" class="hover-dot" />
+              
+              <!-- Pure CSS Tooltip -->
+              <g class="tooltip" style={`transform: translate(${p.x + tooltipOffsetX}px, ${p.y - 12}px)`}>
+                <!-- Glowing drop shadow panel -->
+                <rect x="-60" y="-62" width="120" height="52" rx="10" class="tooltip-bg" />
+                <text y="-44" class="tooltip-date">{formatLabelDate(p.item.date)}</text>
+                <text y="-22" class="tooltip-value">{p.item.aggregate.toLocaleString()}</text>
+                
+                {/* Visual tooltip triangle indicator */}
+                <path d="M -6 -10 L 0 -4 L 6 -10 Z" class="tooltip-arrow" style={`transform: translateX(${-tooltipOffsetX}px)`} />
+              </g>
+              
+              <!-- Large invisible hover area -->
+              <rect
+                x={p.x - (plotWidth / history.length) / 2}
+                y={padding.top}
+                width={plotWidth / history.length}
+                height={plotHeight}
+                class="trigger-rect"
+              />
+            </g>
+          );
+        })}
+      </g>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .chart-container {
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .chart-title-area h3 {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .chart-title-area p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  .total-followers-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .total-followers-count {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .total-followers-label {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 480px) {
+    .chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .total-followers-display {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  .svg-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .growth-svg {
+    display: block;
+    overflow: visible;
+  }
+
+  /* Grid styles */
+  .grid-line {
+    stroke: rgba(255, 255, 255, 0.04);
+    stroke-width: 1;
+  }
+
+  .axis-text {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    fill: var(--color-text-muted);
+  }
+
+  .y-axis-text {
+    text-anchor: end;
+  }
+
+  .x-axis-text {
+    text-anchor: middle;
+  }
+
+  /* Interactive Elements CSS */
+  .point-trigger {
+    cursor: crosshair;
+  }
+
+  .hover-line, 
+  .hover-glow-dot, 
+  .hover-dot, 
+  .tooltip {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-out, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tooltip {
+    transform-origin: bottom center;
+  }
+
+  /* Trigger Hover states */
+  .point-trigger:hover .hover-line {
+    opacity: 0.1;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    stroke-dasharray: 3;
+  }
+
+  .point-trigger:hover .hover-glow-dot {
+    opacity: 0.4;
+    fill: #ec4899;
+    stroke: #ec4899;
+    stroke-width: 4;
+    animation: circlePulse 1.2s infinite ease-out;
+  }
+
+  @keyframes circlePulse {
+    0% {
+      r: 6px;
+      opacity: 0.6;
+    }
+    100% {
+      r: 14px;
+      opacity: 0;
+    }
+  }
+
+  .point-trigger:hover .hover-dot {
+    opacity: 1;
+    fill: #ffffff;
+    stroke: #ec4899;
+    stroke-width: 2.5;
+  }
+
+  .point-trigger:hover .tooltip {
+    opacity: 1;
+  }
+
+  /* Tooltip box design */
+  .tooltip-bg {
+    fill: rgba(10, 10, 20, 0.95);
+    stroke: rgba(236, 72, 153, 0.3);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
+  }
+
+  .tooltip-date {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 500;
+    fill: var(--color-text-secondary);
+    text-anchor: middle;
+  }
+
+  .tooltip-value {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    fill: #ffffff;
+    text-anchor: middle;
+  }
+
+  .tooltip-arrow {
+    fill: rgba(10, 10, 20, 0.95);
+    stroke: rgba(236, 72, 153, 0.3);
+    stroke-width: 1.5;
+  }
+
+  /* Large invisible trigger targets */
+  .trigger-rect {
+    fill: transparent;
+  }
+</style>

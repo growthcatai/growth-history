@@ -1,0 +1,168 @@
+---
+// ShareButton.astro
+---
+
+<button id="share-button" class="btn-share">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+    <polyline points="16 6 12 2 8 6"></polyline>
+    <line x1="12" y1="2" x2="12" y2="15"></line>
+  </svg>
+  <span id="share-btn-text">Share Growth Card</span>
+</button>
+
+<script>
+  // Import html2canvas dynamically inside the client-side script
+  import html2canvas from 'html2canvas';
+
+  const shareBtn = document.getElementById('share-button');
+  const btnText = document.getElementById('share-btn-text');
+
+  if (shareBtn && btnText) {
+    shareBtn.addEventListener('click', async () => {
+      const target = document.getElementById('shareable-container');
+      if (!target) return;
+
+      // Update button state
+      shareBtn.classList.add('loading');
+      btnText.textContent = 'Generating Image...';
+      shareBtn.setAttribute('disabled', 'true');
+
+      try {
+        // Add class to container to toggle watermark visibility and styling adjustments
+        target.classList.add('capturing');
+
+        // Add a micro-delay to let the browser repaint
+        await new Promise((resolve) => setTimeout(resolve, 150));
+
+        // Capture with html2canvas
+        const canvas = await html2canvas(target, {
+          backgroundColor: '#030014',
+          scale: 2, // 2x scale for crystal-clear resolution (retina support)
+          useCORS: true,
+          logging: false,
+          // Exclude any elements that we don't want captured (e.g. interactive-triggers or tooltips)
+          ignoreElements: (element) => {
+            return element.classList.contains('interactive-triggers') || 
+                   element.classList.contains('btn-share');
+          }
+        });
+
+        // Convert canvas to image url
+        const dataUrl = canvas.toDataURL('image/png');
+
+        // Create download link
+        const link = document.createElement('a');
+        link.download = `growth-history-${new Date().toISOString().split('T')[0]}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Success state
+        btnText.textContent = 'Downloaded!';
+        shareBtn.classList.remove('loading');
+        shareBtn.classList.add('success');
+      } catch (err) {
+        console.error('Error generating growth history image:', err);
+        btnText.textContent = 'Share Failed';
+        shareBtn.classList.remove('loading');
+        shareBtn.classList.add('error');
+      } finally {
+        target.classList.remove('capturing');
+        
+        // Reset button state after 2.5 seconds
+        setTimeout(() => {
+          shareBtn.removeAttribute('disabled');
+          shareBtn.classList.remove('success', 'error');
+          btnText.textContent = 'Share Growth Card';
+        }, 2500);
+      }
+    });
+  }
+</script>
+
+<style>
+  .btn-share {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #8b5cf6 0%, #d946ef 100%);
+    border: none;
+    color: #ffffff;
+    padding: 12px 24px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-share::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  .btn-share:hover::before {
+    left: 100%;
+  }
+
+  .btn-share:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.45);
+  }
+
+  .btn-share:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-share:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #27272a;
+    box-shadow: none;
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-share:hover .btn-icon:not(.loading *) {
+    transform: translateY(-1px);
+  }
+
+  /* Loading State */
+  .btn-share.loading {
+    background: #27272a;
+    box-shadow: none;
+  }
+
+  /* Success State */
+  .btn-share.success {
+    background: #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+  }
+
+  /* Error State */
+  .btn-share.error {
+    background: #ef4444;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+  }
+</style>

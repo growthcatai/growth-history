@@ -1,0 +1,234 @@
+---
+interface Props {
+  history: Array<{
+    date: string;
+    instagram: number;
+    x: number;
+    tiktok: number;
+    linkedin: number;
+    aggregate: number;
+  }>;
+}
+
+const { history } = Astro.props;
+
+if (!history || history.length === 0) {
+  throw new Error("BreakdownMatrix requires history data");
+}
+
+const current = history[history.length - 1];
+const previous = history[history.length - 2] || current;
+
+// Calculate changes
+const stats = [
+  {
+    name: 'Instagram',
+    key: 'instagram',
+    current: current.instagram,
+    previous: previous.instagram,
+    colorClass: 'instagram',
+    gradient: 'var(--grad-instagram)',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`
+  },
+  {
+    name: 'X',
+    key: 'x',
+    current: current.x,
+    previous: previous.x,
+    colorClass: 'x',
+    gradient: 'var(--grad-x)',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="social-icon"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`
+  },
+  {
+    name: 'TikTok',
+    key: 'tiktok',
+    current: current.tiktok,
+    previous: previous.tiktok,
+    colorClass: 'tiktok',
+    gradient: 'var(--grad-tiktok)',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="social-icon"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.94-1.72-.49-.44-.9-.97-1.24-1.55v6.52c-.07 2.32-.93 4.67-2.68 6.13-1.8 1.56-4.4 2.15-6.69 1.56-2.26-.52-4.22-2.18-5.07-4.37-.97-2.4-.42-5.33 1.37-7.2 1.55-1.68 3.96-2.38 6.19-1.81V12.7c-1.22-.38-2.61-.08-3.55.77-.96.84-1.26 2.22-1.07 3.44.15 1.15.89 2.19 1.93 2.68 1.05.51 2.35.34 3.23-.42.79-.65 1.18-1.7 1.17-2.71L12.525.02z"/></svg>`
+  },
+  {
+    name: 'LinkedIn',
+    key: 'linkedin',
+    current: current.linkedin,
+    previous: previous.linkedin,
+    colorClass: 'linkedin',
+    gradient: 'var(--grad-linkedin)',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`
+  }
+].map(stat => {
+  const diff = stat.current - stat.previous;
+  const pct = stat.previous > 0 ? (diff / stat.previous) * 100 : 0;
+  return {
+    ...stat,
+    diff,
+    pct,
+    diffFormatted: diff >= 0 ? `+${diff.toLocaleString()}` : diff.toLocaleString(),
+    pctFormatted: diff >= 0 ? `+${pct.toFixed(2)}%` : `${pct.toFixed(2)}%`,
+    currentFormatted: stat.current.toLocaleString()
+  };
+});
+---
+
+<div class="matrix-grid">
+  {stats.map((stat) => (
+    <div class="stat-card glass-panel" style={`--accent-color: var(--color-${stat.colorClass})`}>
+      <div class="card-header">
+        <div class="icon-box" style={`background: ${stat.gradient}`}>
+          <Fragment set:html={stat.icon} />
+        </div>
+        <span class="network-name">{stat.name}</span>
+      </div>
+      
+      <div class="card-body">
+        <h4 class="stat-value">{stat.currentFormatted}</h4>
+        <div class="change-group">
+          <span class={`change-badge ${stat.diff >= 0 ? 'positive' : 'negative'}`}>
+            {stat.diff >= 0 ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="trend-icon"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="trend-icon"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+            )}
+            {stat.diffFormatted}
+          </span>
+          <span class={`pct-label ${stat.diff >= 0 ? 'positive' : 'negative'}`}>{stat.pctFormatted} today</span>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  @media (min-width: 640px) {
+    .matrix-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .matrix-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat-card {
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Decorative glow behind stats */
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, var(--accent-color) 0%, rgba(0, 0, 0, 0) 70%);
+    opacity: 0.12;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .stat-card:hover::before {
+    opacity: 0.25;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  :global(.social-icon) {
+    width: 18px;
+    height: 18px;
+  }
+
+  .network-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+  }
+
+  .change-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .change-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .change-badge.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+  }
+
+  .change-badge.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.15);
+  }
+
+  .trend-icon {
+    width: 11px;
+    height: 11px;
+  }
+
+  .pct-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .pct-label.positive {
+    color: #a1a1aa;
+  }
+
+  .pct-label.negative {
+    color: #a1a1aa;
+  }
+</style>

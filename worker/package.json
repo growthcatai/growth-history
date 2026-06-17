@@ -1,0 +1,15 @@
+{
+  "name": "growth-history-worker",
+  "version": "1.0.0",
+  "description": "Daily ingestion worker for growth-history.com that logs social follower counts to D1 and triggers Astro Pages rebuild.",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.jsonc",
+    "deploy": "wrangler deploy --config wrangler.jsonc"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.2",
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "wrangler": "^4.100.0"
+  }
+}

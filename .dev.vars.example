@@ -1,0 +1,16 @@
+# Growth History Local Development Environment Variables
+# Copy this file to '.dev.vars' to apply them in local development.
+
+# Better Auth URLs and Secrets
+BETTER_AUTH_SECRET="growth-history-better-auth-secret-key-32-chars-long"
+BETTER_AUTH_URL="http://localhost:4321"
+
+# Google OAuth Credentials
+# Create these at https://console.cloud.google.com/
+GOOGLE_CLIENT_ID="your-google-client-id.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Facebook OAuth Credentials
+# Create these at https://developers.facebook.com/
+FACEBOOK_CLIENT_ID="your-facebook-client-id"
+FACEBOOK_CLIENT_SECRET="your-facebook-client-secret"
